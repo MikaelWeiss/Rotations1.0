@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Yzb-Kl-zgF" style="IBUITableViewCellStyleDefault" id="q9d-bc-mCD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupCell" textLabel="Yzb-Kl-zgF" style="IBUITableViewCellStyleDefault" id="q9d-bc-mCD">
                                         <rect key="frame" x="0.0" y="28" width="320" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q9d-bc-mCD" id="cT2-RR-D76">
@@ -42,7 +42,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="pek-u6-nYg" style="IBUITableViewCellStyleDefault" id="2LH-Vt-H6x">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddGroupCell" textLabel="pek-u6-nYg" style="IBUITableViewCellStyleDefault" id="2LH-Vt-H6x">
                                         <rect key="frame" x="0.0" y="90" width="320" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2LH-Vt-H6x" id="wg9-RM-OBT">
@@ -73,7 +73,7 @@
                     <navigationItem key="navigationItem" title="Rotations" id="2Gz-wk-BGL"/>
                     <connections>
                         <segue destination="k4C-jN-n4E" kind="show" identifier="RotationsToMain" id="COi-7Q-b5i"/>
-                        <segue destination="kuo-gc-qKv" kind="show" id="L0O-GW-WgY"/>
+                        <segue destination="kuo-gc-qKv" kind="show" identifier="RotationsToSettings" id="L0O-GW-WgY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zn-jk-H8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="891"/>
+            <point key="canvasLocation" x="1074" y="953"/>
         </scene>
         <!--Main Screen-->
         <scene sceneID="1Ha-ji-9EJ">
@@ -114,7 +114,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ETU-KY-5h2" detailTextLabel="9CE-Al-Q64" style="IBUITableViewCellStyleValue1" id="qTf-uK-GGw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainScreenCell" textLabel="ETU-KY-5h2" detailTextLabel="9CE-Al-Q64" style="IBUITableViewCellStyleValue1" id="qTf-uK-GGw">
                                         <rect key="frame" x="0.0" y="28" width="320" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTf-uK-GGw" id="RBJ-G3-cvo">
