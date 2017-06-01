@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D45FF57D1EDF115100BB41F1 /* GroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FF57C1EDF115100BB41F1 /* GroupScreen.swift */; };
+		D45FF57D1EDF115100BB41F1 /* RotationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */; };
 		D45FF57F1EDF11FA00BB41F1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FF57E1EDF11FA00BB41F1 /* Settings.swift */; };
 		D4A539D41EDD99B300B4F1CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A539D31EDD99B300B4F1CE /* AppDelegate.swift */; };
 		D4A539D91EDD99B300B4F1CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A539D71EDD99B300B4F1CE /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D45FF57C1EDF115100BB41F1 /* GroupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupScreen.swift; sourceTree = "<group>"; };
+		D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationScreen.swift; sourceTree = "<group>"; };
 		D45FF57E1EDF11FA00BB41F1 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D4A539D01EDD99B300B4F1CE /* Rotations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rotations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A539D31EDD99B300B4F1CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 		D4A539E61EDD9AA500B4F1CE /* Controler */ = {
 			isa = PBXGroup;
 			children = (
-				D45FF57C1EDF115100BB41F1 /* GroupScreen.swift */,
+				D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */,
 				D45FF57E1EDF11FA00BB41F1 /* Settings.swift */,
 			);
 			name = Controler;
@@ -178,7 +178,7 @@
 			files = (
 				D45FF57F1EDF11FA00BB41F1 /* Settings.swift in Sources */,
 				D4A539D41EDD99B300B4F1CE /* AppDelegate.swift in Sources */,
-				D45FF57D1EDF115100BB41F1 /* GroupScreen.swift in Sources */,
+				D45FF57D1EDF115100BB41F1 /* RotationScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
