@@ -21,6 +21,17 @@ class Settings: UITableViewController {
     @IBOutlet weak var ManualRotateButton: UISwitch!
     @IBOutlet weak var NotifyWhenRotates: UISwitch!
     @IBOutlet weak var HideEdit: UISwitch!
+// MARK: - Actions:
+    
+    @IBAction func HideEditChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "HideEdit")
+    }
+    @IBAction func NotifyWhenRotatesChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "NotifyWhenRotates")
+    }
+    @IBAction func ManualRotateButtonChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "ManualRotateButton")
+    }
     
 // MARK: - costome functions:
     func setSwitches(key: String, senderSwitch: UISwitch) {
