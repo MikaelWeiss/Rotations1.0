@@ -11,6 +11,7 @@ import UIKit
 class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     var groupArray = [""]
+    @IBOutlet weak var addButtonOutlet: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,19 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
         }else {
             groupArray = [""]
         }
-        
+        addButtonOutlet.isEnabled = false
+        addButtonOutlet.tintColor = UIColor.clear
     }
     @IBOutlet weak var MyTableView: UITableView!
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         MyTableView.isEditing = !MyTableView.isEditing
+        if MyTableView.isEditing == true {
+            addButtonOutlet.isEnabled = true
+            addButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+        }else {
+            addButtonOutlet.isEnabled = false
+            addButtonOutlet.tintColor = UIColor.clear
+        }
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())

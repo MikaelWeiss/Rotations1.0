@@ -47,5 +47,5 @@ class Settings: UITableViewController {
         UserDefaults.standard.set(false, forKey: UserDefaultsValue)
         SenderButton.setOn(false, animated: true)
     }
-    
+
 }

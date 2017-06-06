@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -67,14 +68,22 @@
                                 <segue destination="HD7-0g-22G" kind="show" id="KjG-fs-G5r"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Juv-Vi-S1t">
-                            <connections>
-                                <action selector="EditButton:" destination="BYZ-38-t0r" id="3ui-Bm-XaZ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="Juv-Vi-S1t">
+                                <connections>
+                                    <action selector="EditButton:" destination="BYZ-38-t0r" id="3ui-Bm-XaZ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="Zhi-ku-ys1">
+                                <connections>
+                                    <action selector="AddButton:" destination="BYZ-38-t0r" id="2gy-32-iti"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="MyTableView" destination="lr5-M8-w25" id="fVU-Uk-bur"/>
+                        <outlet property="addButtonOutlet" destination="Zhi-ku-ys1" id="4tb-xd-6dQ"/>
                         <segue destination="k4C-jN-n4E" kind="show" identifier="RotationsToMain" id="COi-7Q-b5i"/>
                     </connections>
                 </viewController>
