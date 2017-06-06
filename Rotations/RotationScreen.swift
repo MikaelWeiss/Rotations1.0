@@ -9,26 +9,55 @@
 import UIKit
 
 class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegate {
+    
     var groupArray = [""]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        if UserDefaults.standard.object(forKey: "Groups") != nil {
+            groupArray = UserDefaults.standard.object(forKey: "Groups") as! [String]
+        }else {
+            groupArray = [""]
+        }
+        
+    }
+    @IBOutlet weak var MyTableView: UITableView!
+    @IBAction func EditButton(_ sender: UIBarButtonItem) {
+        MyTableView.isEditing = !MyTableView.isEditing
+    }
+    @IBAction func SettingButton(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
     }
     
+    
+    @IBAction func AddButton(_ sender: UIBarButtonItem) {
+        
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if MyTableView.isEditing == true {
+            
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
-        return cell
+        if indexPath.row <= groupArray.count {
+            
+            let GroupCell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
+            return GroupCell
+        }else {
+            let AddCell = tableView.dequeueReusableCell(withIdentifier: "AddGroupCell", for: indexPath)
+            return AddCell
+        }
+
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -36,9 +65,9 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
             groupArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+            
         }
     }
-
-
+// MARK: - Costome functions:
+    
 }
