@@ -9,10 +9,13 @@
 import UIKit
 
 class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegate {
-    
+// MARK: - Values:
     var groupArray = [""]
+// MARK: - Outlets:
     @IBOutlet weak var addButtonOutlet: UIBarButtonItem!
-    
+    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var MyTableView: UITableView!
+// MARK: - System Setup:
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,7 +27,22 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
         addButtonOutlet.isEnabled = false
         addButtonOutlet.tintColor = UIColor.clear
     }
-    @IBOutlet weak var MyTableView: UITableView!
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
+            if UserDefaults.standard.bool(forKey: "HideEdit") == true {
+                editButtonOutlet.isEnabled = false
+                editButtonOutlet.tintColor = UIColor.clear
+            }else {
+                editButtonOutlet.isEnabled = true
+                editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+            }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+// MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         MyTableView.isEditing = !MyTableView.isEditing
         if MyTableView.isEditing == true {
@@ -43,11 +61,7 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
     @IBAction func AddButton(_ sender: UIBarButtonItem) {
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
+// MARK: - TableView Setup:
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if MyTableView.isEditing == true {
             
@@ -66,7 +80,7 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
             let AddCell = tableView.dequeueReusableCell(withIdentifier: "AddGroupCell", for: indexPath)
             return AddCell
         }
-
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
