@@ -27,16 +27,22 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
         addButtonOutlet.isEnabled = false
         addButtonOutlet.tintColor = UIColor.clear
     }
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
+            //MARK: set up the edit button
             if UserDefaults.standard.bool(forKey: "HideEdit") == true {
                 editButtonOutlet.isEnabled = false
                 editButtonOutlet.tintColor = UIColor.clear
+                addButtonOutlet.isEnabled = false
+                addButtonOutlet.tintColor = UIColor.clear
             }else {
                 editButtonOutlet.isEnabled = true
                 editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+                addButtonOutlet.isEnabled = false
+                addButtonOutlet.tintColor = UIColor.clear
             }
         }
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -52,6 +58,7 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
             addButtonOutlet.isEnabled = false
             addButtonOutlet.tintColor = UIColor.clear
         }
+        MyTableView.dequeueReusableCell(withIdentifier: "AddGroupCell")
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
