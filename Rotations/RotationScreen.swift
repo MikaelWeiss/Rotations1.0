@@ -8,9 +8,10 @@
 
 import UIKit
 
-class RotationScreen: UITableViewController {
+class RotationScreen: UITableViewController, UITextFieldDelegate {
 // MARK: - Values:
-    var groupArray = [""]
+    var groupArray: [String]?
+    var canAddGroupCell: Bool?
 // MARK: - Outlets:
     @IBOutlet weak var addButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
@@ -19,11 +20,6 @@ class RotationScreen: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if UserDefaults.standard.object(forKey: "Groups") != nil {
-            groupArray = UserDefaults.standard.object(forKey: "Groups") as! [String]
-        }else {
-            groupArray = [""]
-        }
         addButtonOutlet.isEnabled = false
         addButtonOutlet.tintColor = UIColor.clear
     }
@@ -41,6 +37,14 @@ class RotationScreen: UITableViewController {
                 addButtonOutlet.isEnabled = false
                 addButtonOutlet.tintColor = UIColor.clear
             }
+            
+        }
+        if UserDefaults.standard.object(forKey: "Groups") != nil {
+            groupArray = UserDefaults.standard.object(forKey: "Groups") as? [String]
+            canAddGroupCell = true
+        }else {
+            groupArray = nil
+            canAddGroupCell = false
         }
         
     }
@@ -68,7 +72,57 @@ class RotationScreen: UITableViewController {
        
     }
 // MARK: - TableView Setup:
-    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if groupArray != nil {
+            return (groupArray?.count)! + 1
+        }else {
+            return 1
+        }
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if groupArray != nil {
+            if indexPath.row <= (groupArray?.count)! {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+                cell.detailTextLabel?.text = groupArray?[indexPath.row]
+                return cell
+            }else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
+                return cell
+            }
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
+            return cell
+        }
+    }
+// MARK: - TextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField.text != nil {
+            if groupArray != nil {
+                if (groupArray?.contains(textField.text!))! {
+                    AlertAction(Title: "Group Exists", Message: "This Group Already Exists", alerTitle: "OK")
+                }else {
+                    groupArray?.append(textField.text!)
+                    UserDefaults.standard.setValue(groupArray, forKey: "Groups")
+                }
+            }else {
+                groupArray?.append(textField.text!)
+                UserDefaults.standard.setValue(groupArray, forKey: "Groups")
+            }
+        }
+        MyTableView.reloadData()
+        return true
+    }
 // MARK: - Costome functions:
-    
+    func AlertAction(Title: String, Message: String, alerTitle: String) {
+        // create the alert
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: alerTitle, style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 }

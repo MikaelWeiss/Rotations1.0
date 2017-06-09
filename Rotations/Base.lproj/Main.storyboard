@@ -212,6 +212,31 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addGroupCell" id="8GC-7P-CpC">
+                                <rect key="frame" x="0.0" y="90" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8GC-7P-CpC" id="vsF-BO-hcJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Group" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l36-pE-iZC">
+                                            <rect key="frame" x="8" y="0.0" width="312" height="62"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="hqB-WL-A9F" id="jpo-Df-5QE"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="l36-pE-iZC" secondAttribute="bottom" id="4Zc-ja-Pbk"/>
+                                        <constraint firstAttribute="trailing" secondItem="l36-pE-iZC" secondAttribute="trailing" id="Eeh-lA-xFn"/>
+                                        <constraint firstItem="l36-pE-iZC" firstAttribute="leading" secondItem="vsF-BO-hcJ" secondAttribute="leading" constant="8" id="VJR-g6-ByZ"/>
+                                        <constraint firstItem="l36-pE-iZC" firstAttribute="top" secondItem="vsF-BO-hcJ" secondAttribute="top" id="eQg-LB-I4j"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="hqB-WL-A9F" id="RfP-pf-TD6"/>
