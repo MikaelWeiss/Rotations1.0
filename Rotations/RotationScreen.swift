@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class RotationScreen: UITableViewController {
 // MARK: - Values:
     var groupArray = [""]
 // MARK: - Outlets:
@@ -58,7 +58,6 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
             addButtonOutlet.isEnabled = false
             addButtonOutlet.tintColor = UIColor.clear
         }
-        MyTableView.dequeueReusableCell(withIdentifier: "AddGroupCell")
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
@@ -66,38 +65,10 @@ class RotationScreen: UIViewController,UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func AddButton(_ sender: UIBarButtonItem) {
-        
+       
     }
 // MARK: - TableView Setup:
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if MyTableView.isEditing == true {
-            
-        }
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupArray.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row <= groupArray.count {
-            
-            let GroupCell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
-            return GroupCell
-        }else {
-            let AddCell = tableView.dequeueReusableCell(withIdentifier: "AddGroupCell", for: indexPath)
-            return AddCell
-        }
-        
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            groupArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            
-        }
-    }
 // MARK: - Costome functions:
     
 }
