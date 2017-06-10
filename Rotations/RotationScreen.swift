@@ -46,7 +46,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             groupArray = nil
             canAddGroupCell = false
         }
-        
+        MyTableView.isEditing = false
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -110,7 +110,8 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
                 UserDefaults.standard.setValue(groupArray, forKey: "Groups")
             }
         }
-        MyTableView.reloadData()
+        MyTableView.beginUpdates()
+        MyTableView.endUpdates()
         return true
     }
 // MARK: - Costome functions:
