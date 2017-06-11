@@ -51,6 +51,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+                                                                                // use this to pass on the rotations data?
     }
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
@@ -71,6 +72,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     @IBAction func AddButton(_ sender: UIBarButtonItem) {
        
     }
+
 // MARK: - TableView Setup:
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groupArray != nil {
