@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -191,27 +190,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Rotations" id="k81-B8-ze8">
-                        <barButtonItem key="leftBarButtonItem" image="Settings" id="fGg-Pa-0b4">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-settings" id="fGg-Pa-0b4">
                             <connections>
                                 <action selector="SettingButton:" destination="hqB-WL-A9F" id="smD-ev-J16"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Edit" id="Wox-CC-U2k">
-                                <connections>
-                                    <action selector="EditButton:" destination="hqB-WL-A9F" id="Joa-Ri-k3u"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" id="i2d-nP-LTw">
-                                <connections>
-                                    <action selector="AddButton:" destination="hqB-WL-A9F" id="GT4-QM-7ne"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Wox-CC-U2k">
+                            <connections>
+                                <action selector="EditButton:" destination="hqB-WL-A9F" id="Joa-Ri-k3u"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="MyTableView" destination="qWJ-CD-BW3" id="atm-4P-uta"/>
-                        <outlet property="addButtonOutlet" destination="i2d-nP-LTw" id="M5c-os-Qij"/>
                         <outlet property="editButtonOutlet" destination="Wox-CC-U2k" id="8RW-lc-ELq"/>
                         <segue destination="HD7-0g-22G" kind="show" identifier="RotationsToSettings" id="n6q-15-2GD"/>
                         <segue destination="zLI-vU-aOT" kind="show" identifier="RotationsToMain" id="7J6-VE-JMu"/>
@@ -289,7 +280,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Settings" width="25" height="25"/>
+        <image name="icons8-settings" width="25" height="25"/>
     </resources>
     <color key="tintColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
 </document>

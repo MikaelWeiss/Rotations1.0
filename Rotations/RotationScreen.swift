@@ -13,15 +13,12 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     var groupArray: [String]?
     var canAddGroupCell: Bool?
 // MARK: - Outlets:
-    @IBOutlet weak var addButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var MyTableView: UITableView!
 // MARK: - System Setup:
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        addButtonOutlet.isEnabled = false
-        addButtonOutlet.tintColor = UIColor.clear
     }
     override func viewWillAppear(_ animated: Bool) {
         if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
@@ -29,13 +26,9 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             if UserDefaults.standard.bool(forKey: "HideEdit") == true {
                 editButtonOutlet.isEnabled = false
                 editButtonOutlet.tintColor = UIColor.clear
-                addButtonOutlet.isEnabled = false
-                addButtonOutlet.tintColor = UIColor.clear
             }else {
                 editButtonOutlet.isEnabled = true
                 editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
-                addButtonOutlet.isEnabled = false
-                addButtonOutlet.tintColor = UIColor.clear
             }
             
         }
@@ -49,52 +42,59 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         MyTableView.isEditing = false
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-                                                                                // use this to pass on the rotations data?
+        
     }
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         MyTableView.isEditing = !MyTableView.isEditing
-        if MyTableView.isEditing == true {
-            addButtonOutlet.isEnabled = true
-            addButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
-        }else {
-            addButtonOutlet.isEnabled = false
-            addButtonOutlet.tintColor = UIColor.clear
-        }
+        MyTableView.reloadData()
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
     }
-    
-    
-    @IBAction func AddButton(_ sender: UIBarButtonItem) {
-       
-    }
 
 // MARK: - TableView Setup:
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if groupArray != nil {
-            return (groupArray?.count)! + 1
-        }else {
-            return 1
+    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if groupArray == nil {
+            return 0
         }
+        
+        return groupArray!.count + 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if groupArray != nil {
-            if indexPath.row <= (groupArray?.count)! {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
-                cell.detailTextLabel?.text = groupArray?[indexPath.row]
-                return cell
-            }else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
-                return cell
-            }
+        if isEditing && indexPath.row == 0 {
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell")
+            return Cell!
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
-            return cell
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell")
+            return Cell!
         }
+    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // The initial row is reserved for adding new items so it can't be deleted or edited.
+        if indexPath.row == 0 {
+            return false
+        }
+        return true
+    }
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // The initial row is reserved for adding new items so it can't be moved.
+        if indexPath.row == 0 {
+            return false
+        }
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle != .delete {
+                return
+            }
+            groupArray?.remove(at: indexPath.row - 1)
+    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = groupArray![sourceIndexPath.row - 1]
+        groupArray?.remove(at: sourceIndexPath.row - 1)
+        groupArray?.insert(item, at: destinationIndexPath.row - 1)
+        UserDefaults.standard.set(groupArray, forKey: "Groups")
     }
 // MARK: - TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
