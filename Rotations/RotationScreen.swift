@@ -11,10 +11,9 @@ import UIKit
 class RotationScreen: UITableViewController, UITextFieldDelegate {
 // MARK: - Values:
     var groupArray: [String]?
-    var canAddGroupCell: Bool?
 // MARK: - Outlets:
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
-    @IBOutlet weak var MyTableView: UITableView!
+//    @IBOutlet weak var MyTableView: UITableView!
 // MARK: - System Setup:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +33,18 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         }
         if UserDefaults.standard.object(forKey: "Groups") != nil {
             groupArray = UserDefaults.standard.object(forKey: "Groups") as? [String]
-            canAddGroupCell = true
         }else {
             groupArray = nil
-            canAddGroupCell = false
         }
-        MyTableView.isEditing = false
+        tableView.isEditing = false
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
-        MyTableView.isEditing = !MyTableView.isEditing
-        MyTableView.reloadData()
+        tableView.isEditing = !tableView.isEditing
+        tableView.reloadData()
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
@@ -62,7 +59,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         return groupArray!.count + 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isEditing && indexPath.row == 0 {
+        if isEditing && indexPath.row == 1 {
             let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell")
             return Cell!
         }else {
@@ -112,8 +109,8 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
                 UserDefaults.standard.setValue(groupArray, forKey: "Groups")
             }
         }
-        MyTableView.beginUpdates()
-        MyTableView.endUpdates()
+        tableView.beginUpdates()
+        tableView.endUpdates()
         return true
     }
 // MARK: - Costome functions:
