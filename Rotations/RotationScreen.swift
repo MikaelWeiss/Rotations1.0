@@ -45,6 +45,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
         tableView.reloadData()
+//        mabey tableView.addRow? but where do I get the IndexPath
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
