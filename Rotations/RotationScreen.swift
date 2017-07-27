@@ -13,6 +13,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     var groupArray: [String]?
 // MARK: - Outlets:
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+    @IBOutlet var mytableView: UITableView!
 //    @IBOutlet weak var MyTableView: UITableView!
 // MARK: - System Setup:
     override func viewDidLoad() {
@@ -67,6 +68,11 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     }
 
 // MARK: - TableView Setup:
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // PRINT 🖨
+        print("NumberOfSections Called")
+        return 1
+    }
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         // PRINT 🖨
         print("NumberOfRowsInSection begun")
@@ -126,14 +132,14 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // PRINT 🖨
         print("commit editingStyle begun")
-            if editingStyle != .delete {
-                // PRINT 🖨
-                print("EditingStyle is not .delete")
-                return
-            }
+        if editingStyle != .delete {
+            // PRINT 🖨
+            print("EditingStyle is not .delete")
+            return
+        }
         // PRINT 🖨
         print("editingStyle is .delete")
-            groupArray?.remove(at: indexPath.row - 1)
+        groupArray?.remove(at: indexPath.row - 1)
         // PRINT 🖨
         print("Deleted From Row")
     }
