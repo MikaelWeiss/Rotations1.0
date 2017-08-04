@@ -52,26 +52,38 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
 
 // MARK: - TableView Setup:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if groupArray == emptyArray {
-            tableView.isEditing = true
-            return 1
+        if tableView.isEditing {
+            if groupArray == emptyArray {
+                tableView.isEditing = true
+                return 1
+            }
+            return groupArray.count + 1
+        }else {
+            if groupArray == emptyArray {
+                return 1
+            }
+            return groupArray.count
         }
-        return groupArray.count + 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var identifier: String
         
         print(tableView.isEditing)//Prints true
-        if indexPath.row == 0 {
-            identifier = "addGroupCell"
+        if tableView.isEditing == true && indexPath.row == 0 {
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
             print(indexPath.row)
             print("AddGroupCell")
+            return Cell
         }else {
-            identifier = "GroupTitleCell"
-            print(indexPath.row) //Prints 0
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+            if groupArray != emptyArray {
+                if tableView.isEditing == true {
+                    Cell.textLabel?.text = groupArray[indexPath.row - 1]
+                }
+            }
+            print(indexPath.row)
             print("GroupCell")
+            return Cell
         }
-        return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // The initial row is reserved for adding new items so it can't be deleted or edited.
