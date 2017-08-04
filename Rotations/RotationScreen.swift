@@ -35,7 +35,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         if UserDefaults.standard.object(forKey: "Groups") != nil {
             groupArray = (UserDefaults.standard.object(forKey: "Groups") as? [String])!
         }
-        tableView.isEditing = true
+        tableView.isEditing = false
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -43,6 +43,11 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
+        if tableView.isEditing == true {
+            sender.title = "Done"
+        }else {
+            sender.title = "Edit"
+        }
         tableView.reloadData()
 //        mabey tableView.addRow? but where do I get the IndexPath
     }
@@ -78,6 +83,8 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             if groupArray != emptyArray {
                 if tableView.isEditing == true {
                     Cell.textLabel?.text = groupArray[indexPath.row - 1]
+                }else {
+                    Cell.textLabel?.text = groupArray[indexPath.row]
                 }
             }
             print(indexPath.row)
