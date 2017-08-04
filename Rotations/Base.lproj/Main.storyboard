@@ -203,7 +203,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="editButtonOutlet" destination="Wox-CC-U2k" id="8RW-lc-ELq"/>
-                        <outlet property="mytableView" destination="qWJ-CD-BW3" id="E71-n6-Tgf"/>
                         <segue destination="HD7-0g-22G" kind="show" identifier="RotationsToSettings" id="n6q-15-2GD"/>
                         <segue destination="zLI-vU-aOT" kind="show" identifier="RotationsToMain" id="7J6-VE-JMu"/>
                     </connections>

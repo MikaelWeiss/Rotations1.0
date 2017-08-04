@@ -10,10 +10,10 @@ import UIKit
 
 class RotationScreen: UITableViewController, UITextFieldDelegate {
 // MARK: - Values:
-    var groupArray: [String]?
+    var groupArray: [String] = []
+    var emptyArray: [String] = []
 // MARK: - Outlets:
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
-    @IBOutlet var mytableView: UITableView!
 //    @IBOutlet weak var MyTableView: UITableView!
 // MARK: - System Setup:
     override func viewDidLoad() {
@@ -21,8 +21,6 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-        // PRINT 🖨
-        print("View will apear")
         if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
             //MARK: set up the edit button
             if UserDefaults.standard.bool(forKey: "HideEdit") == true {
@@ -35,32 +33,17 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             
         }
         if UserDefaults.standard.object(forKey: "Groups") != nil {
-            groupArray = UserDefaults.standard.object(forKey: "Groups") as? [String]
-            // PRINT 🖨
-            print("Group Array is not nil in view will apear")
-        }else {
-            groupArray = nil
-            // PRINT 🖨
-            print("Group Array is nil in view will apear")
+            groupArray = (UserDefaults.standard.object(forKey: "Groups") as? [String])!
         }
-        tableView.isEditing = false
-        // PRINT 🖨
-        print("IsEditing set to false")
-        
+        tableView.isEditing = true
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
-        // PRINT 🖨
-        print("editButton")
         tableView.isEditing = !tableView.isEditing
-        // PRINT 🖨
-        print("Tableview.isEditing = " + String(tableView.isEditing))
         tableView.reloadData()
-        // PRINT 🖨
-        print("table view.reloadData is done")
 //        mabey tableView.addRow? but where do I get the IndexPath
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
@@ -68,123 +51,77 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     }
 
 // MARK: - TableView Setup:
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // PRINT 🖨
-        print("NumberOfSections Called")
-        return 1
-    }
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // PRINT 🖨
-        print("NumberOfRowsInSection begun")
-        if groupArray == nil {
-            // PRINT 🖨
-            print("Group Array is nil")
-            return 0
+        if groupArray == emptyArray {
+            tableView.isEditing = true
+            return 1
         }
-        
-        // PRINT 🖨
-        print("Group Array is not nil")
-        return groupArray!.count + 1
+        return groupArray.count + 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // PRINT 🖨
-        print("Start of cellForRow")
-        if isEditing && indexPath.row == 1 {
-            // PRINT 🖨
-            print("isEditing = True && indexpath.row = 1")
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell")
-            // PRINT 🖨
-            print("Dequeued addGroupCell")
-            return Cell!
+        var identifier: String
+        
+        print(tableView.isEditing)//Prints true
+        if indexPath.row == 0 {
+            identifier = "addGroupCell"
+            print(indexPath.row)
+            print("AddGroupCell")
         }else {
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell")
-            // PRINT 🖨
-            print("Dequeued GroupTitleCell")
-            return Cell!
+            identifier = "GroupTitleCell"
+            print(indexPath.row) //Prints 0
+            print("GroupCell")
         }
+        return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // The initial row is reserved for adding new items so it can't be deleted or edited.
-        // PRINT 🖨
-        print("CanEditRow begun")
         if indexPath.row == 0 {
-            // PRINT 🖨
-            print("index path.row = 0")
             return false
         }
-        // PRINT 🖨
-        print("diferent row")
         return true
     }
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // The initial row is reserved for adding new items so it can't be moved.
-        // PRINT 🖨
-        print("canMoveRow begun")
+        // The initial row is reserved for adding new items so it can't be moved.     
         if indexPath.row == 0 {
-            // PRINT 🖨
-            print("indexPath.row = 0")
             return false
         }
-        // PRINT 🖨
-        print("diferent Row")
         return true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        // PRINT 🖨
-        print("commit editingStyle begun")
         if editingStyle != .delete {
-            // PRINT 🖨
-            print("EditingStyle is not .delete")
             return
         }
-        // PRINT 🖨
-        print("editingStyle is .delete")
-        groupArray?.remove(at: indexPath.row - 1)
-        // PRINT 🖨
-        print("Deleted From Row")
+        groupArray.remove(at: indexPath.row - 1)
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // PRINT 🖨
-        print("moveRowAt begun")
-        let item = groupArray![sourceIndexPath.row - 1]
-        groupArray?.remove(at: sourceIndexPath.row - 1)
-        groupArray?.insert(item, at: destinationIndexPath.row - 1)
+        let item = groupArray[sourceIndexPath.row - 1]
+        groupArray.remove(at: sourceIndexPath.row - 1)
+        groupArray.insert(item, at: destinationIndexPath.row - 1)
         UserDefaults.standard.set(groupArray, forKey: "Groups")
-        // PRINT 🖨
-        print("Move Row done")
     }
 // MARK: - TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // PRINT 🖨
-        print("textField stuff")
         textField.resignFirstResponder()
-        if textField.text != nil {
-            if groupArray != nil {
-                if (groupArray?.contains(textField.text!))! {
+        if textField.text != "" {
+            if groupArray != emptyArray {
+                if groupArray.contains(textField.text! as String) {
                     AlertAction(Title: "Group Exists", Message: "This Group Already Exists", alerTitle: "OK")
                 }else {
-                    groupArray?.append(textField.text!)
+                    groupArray.append(textField.text!)
                     UserDefaults.standard.setValue(groupArray, forKey: "Groups")
                 }
             }else {
-                groupArray?.append(textField.text!)
+                groupArray.append(textField.text!)
                 UserDefaults.standard.setValue(groupArray, forKey: "Groups")
             }
         }
-        tableView.beginUpdates()
-        // PRINT 🖨
-        print("Table view began updates")
-        tableView.endUpdates()
-        // PRINT 🖨
-        print("Table view end updates")
-        // PRINT 🖨
-        print("Text feild stuff done")
+        print(groupArray)
+        textField.text = ""
+        tableView.reloadData()
         return true
     }
 // MARK: - Costome functions:
     func AlertAction(Title: String, Message: String, alerTitle: String) {
-        // PRINT 🖨
-        print("alertAction started")
         // create the alert
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertControllerStyle.alert)
         
