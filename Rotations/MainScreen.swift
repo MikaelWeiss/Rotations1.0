@@ -35,9 +35,11 @@ class MainScreen: UITableViewController {
         }
         if UserDefaults.standard.object(forKey: "People" + rotation) != nil {
             people = UserDefaults.standard.object(forKey: "People" + rotation) as! [String]
+            firstPeople = people
         }
         if UserDefaults.standard.object(forKey: "Assignments" + rotation) != nil {
             assignments = UserDefaults.standard.object(forKey: "Assignments" + rotation) as! [String]
+            firstAssignments = assignments
         }
         if tableView.isEditing == true {
             editButtonOutlet.title = "Done"
@@ -116,14 +118,16 @@ class MainScreen: UITableViewController {
         let alert = UIAlertController(title: "Deleting", message: "Do you want to delete the person or the assignment from this rotation?", preferredStyle: UIAlertControllerStyle.alert)
         // add an action (button)
         alert.addAction(UIAlertAction(title: "Person", style: UIAlertActionStyle.default, handler: { (PersonPressed) in
-            self.people.remove(at: indexPath.row - 2)
-            print(self.people)
+            self.firstPeople.remove(at: indexPath.row - 2)
+            self.people = self.firstPeople
+            print(self.firstPeople)
             tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Assignment", style: UIAlertActionStyle.default, handler: {
             (AssignmentsPressed) in
-            self.assignments.remove(at: indexPath.row - 2)
-            print(self.assignments)
+            self.firstAssignments.remove(at: indexPath.row - 2)
+            print(self.firstAssignments)
+            self.assignments = self.firstAssignments
             tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
