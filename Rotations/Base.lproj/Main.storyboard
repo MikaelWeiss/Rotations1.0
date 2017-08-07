@@ -276,7 +276,7 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainScreenCell" textLabel="nNt-0a-TNR" detailTextLabel="HV9-TZ-a9K" rowHeight="62" style="IBUITableViewCellStyleValue1" id="J4Y-8p-2Jf">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mainScreenCell" textLabel="nNt-0a-TNR" detailTextLabel="HV9-TZ-a9K" rowHeight="62" style="IBUITableViewCellStyleValue1" id="J4Y-8p-2Jf">
                                 <rect key="frame" x="0.0" y="152" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J4Y-8p-2Jf" id="xTI-uz-0ck">

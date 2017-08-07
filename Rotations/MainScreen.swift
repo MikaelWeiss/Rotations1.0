@@ -13,6 +13,10 @@ class MainScreen: UITableViewController {
     var rotation = ""
     var people: [String] = []
     var assignments: [String] = []
+    var ifNoAssignment = "No Assignment"
+    var ifNoPerson = "No Person"
+    var firstPeople: [String] = []
+    var firstAssignments: [String] = []
 // MARK: - View Stuff
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +65,6 @@ class MainScreen: UITableViewController {
             if tableView.isEditing == true {
                 return people.count + 2
             }else {
-                if people.isEmpty {
-                    tableView.isEditing = true
-                    return 2
-                }
                 return people.count
             }
         }else {
@@ -116,11 +116,15 @@ class MainScreen: UITableViewController {
         let alert = UIAlertController(title: "Deleting", message: "Do you want to delete the person or the assignment from this rotation?", preferredStyle: UIAlertControllerStyle.alert)
         // add an action (button)
         alert.addAction(UIAlertAction(title: "Person", style: UIAlertActionStyle.default, handler: { (PersonPressed) in
-            self.people.remove(at: indexPath.row)
+            self.people.remove(at: indexPath.row - 2)
+            print(self.people)
+            tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Assignment", style: UIAlertActionStyle.default, handler: {
             (AssignmentsPressed) in
-            self.assignments.remove(at: indexPath.row)
+            self.assignments.remove(at: indexPath.row - 2)
+            print(self.assignments)
+            tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
         // show the alert
@@ -139,24 +143,28 @@ class MainScreen: UITableViewController {
                         if people.contains(textField.text! as String) {
                             AlertAction(Title: "Person Exists", Message: "This person already exists in this rotation", alerTitle: "OK")
                         }else {
-                            people.append(textField.text!)
-                            UserDefaults.standard.setValue(people, forKey: "People" + rotation)
+                            firstPeople.append(textField.text!)
+                            UserDefaults.standard.setValue(firstPeople, forKey: "People" + rotation)
+                            people = firstPeople
                         }
                     }else {
-                        people.append(textField.text!)
-                        UserDefaults.standard.setValue(people, forKey: "People" + rotation)
+                        firstPeople.append(textField.text!)
+                        UserDefaults.standard.setValue(firstPeople, forKey: "People" + rotation)
+                        people = firstPeople
                     }
                 }else if textField.tag == 2 {
                     if assignments.isEmpty == false {
                         if assignments.contains(textField.text! as String) {
                             AlertAction(Title: "assignment Exists", Message: "This assignment already exists in this rotation", alerTitle: "OK")
                         }else {
-                            assignments.append(textField.text!)
-                            UserDefaults.standard.setValue(assignments, forKey: "Assignments" + rotation)
+                            firstAssignments.append(textField.text!)
+                            UserDefaults.standard.setValue(firstAssignments, forKey: "Assignments" + rotation)
+                            assignments = firstAssignments
                         }
                     }else {
-                        assignments.append(textField.text!)
-                        UserDefaults.standard.setValue(assignments, forKey: "Assignments" + rotation)
+                        firstAssignments.append(textField.text!)
+                        UserDefaults.standard.setValue(firstAssignments, forKey: "Assignments" + rotation)
+                        assignments = firstAssignments
                     }
                 }
             }
@@ -165,15 +173,17 @@ class MainScreen: UITableViewController {
             return true
         }
 // MARK: - Costome functions:
-    var ifNoAssignment = "No Assignment"
-    var ifNoPerson = "No Person"
     func apendNonAplicable() {
         if people.count < assignments.count {
+            firstPeople = people
             while people.count < assignments.count {
+                people = firstPeople
                 people.append(ifNoPerson)
             }
         }else if people.count > assignments.count {
+            firstAssignments = assignments
             while people.count > assignments.count {
+                assignments = firstAssignments
                 assignments.append(ifNoAssignment)
             }
         }

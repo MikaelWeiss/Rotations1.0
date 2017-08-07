@@ -36,6 +36,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             groupArray = (UserDefaults.standard.object(forKey: "Groups") as? [String])!
         }
         if groupArray.isEmpty {
+            editButtonOutlet.title = "Done"
             tableView.isEditing = true
         }else {
             tableView.isEditing = false
@@ -50,6 +51,9 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
+        if groupArray.isEmpty == true {
+            tableView.isEditing = true
+        }
         if tableView.isEditing == true {
             sender.title = "Done"
         }else {
@@ -66,6 +70,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEditing == true {
             if groupArray.isEmpty {
+                editButtonOutlet.title = "Done"
                 tableView.isEditing = true
                 return 1
             }
@@ -139,7 +144,6 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     }
 // MARK: - TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
         if textField.text != "" {
             if groupArray.isEmpty == false {
                 if groupArray.contains(textField.text! as String) {
@@ -155,7 +159,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         }
         textField.text = ""
         tableView.reloadData()
-        return true
+        return false
     }
 // MARK: - Costome functions:
     func AlertAction(Title: String, Message: String, alerTitle: String) {
