@@ -9,17 +9,18 @@
 /* Begin PBXBuildFile section */
 		D45FF57D1EDF115100BB41F1 /* RotationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */; };
 		D45FF57F1EDF11FA00BB41F1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45FF57E1EDF11FA00BB41F1 /* Settings.swift */; };
+		D46F53461F3909B700BED1A8 /* RotationsIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D46F53451F3909B700BED1A8 /* RotationsIcon.xcassets */; };
 		D48095471EECC0A8002B0727 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48095461EECC0A8002B0727 /* MainScreen.swift */; };
 		D4A539D41EDD99B300B4F1CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A539D31EDD99B300B4F1CE /* AppDelegate.swift */; };
 		D4A539D91EDD99B300B4F1CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A539D71EDD99B300B4F1CE /* Main.storyboard */; };
 		D4A539DB1EDD99B300B4F1CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A539DA1EDD99B300B4F1CE /* Assets.xcassets */; };
 		D4A539DE1EDD99B300B4F1CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A539DC1EDD99B300B4F1CE /* LaunchScreen.storyboard */; };
-		D4A539EA1EDD9B8300B4F1CE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A539E91EDD9B8300B4F1CE /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationScreen.swift; sourceTree = "<group>"; };
 		D45FF57E1EDF11FA00BB41F1 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D46F53451F3909B700BED1A8 /* RotationsIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RotationsIcon.xcassets; sourceTree = "<group>"; };
 		D48095461EECC0A8002B0727 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		D4A539D01EDD99B300B4F1CE /* Rotations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rotations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A539D31EDD99B300B4F1CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		D4A539DA1EDD99B300B4F1CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4A539DD1EDD99B300B4F1CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4A539DF1EDD99B300B4F1CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4A539E91EDD9B8300B4F1CE /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +96,7 @@
 		D4A539E81EDD9AC400B4F1CE /* Extras */ = {
 			isa = PBXGroup;
 			children = (
-				D4A539E91EDD9B8300B4F1CE /* Media.xcassets */,
+				D46F53451F3909B700BED1A8 /* RotationsIcon.xcassets */,
 				D4A539DA1EDD99B300B4F1CE /* Assets.xcassets */,
 				D4A539D31EDD99B300B4F1CE /* AppDelegate.swift */,
 				D4A539DC1EDD99B300B4F1CE /* LaunchScreen.storyboard */,
@@ -167,8 +167,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A539DE1EDD99B300B4F1CE /* LaunchScreen.storyboard in Resources */,
+				D46F53461F3909B700BED1A8 /* RotationsIcon.xcassets in Resources */,
 				D4A539DB1EDD99B300B4F1CE /* Assets.xcassets in Resources */,
-				D4A539EA1EDD9B8300B4F1CE /* Media.xcassets in Resources */,
 				D4A539D91EDD99B300B4F1CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = X7WM6K9T24;
 				INFOPLIST_FILE = Rotations/Info.plist;
@@ -323,6 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = X7WM6K9T24;
 				INFOPLIST_FILE = Rotations/Info.plist;

@@ -59,10 +59,6 @@ class MainScreen: UITableViewController {
         apendNonAplicable()
         if people.count == assignments.count {
             if tableView.isEditing == true {
-                if people.isEmpty {
-                    tableView.isEditing = true
-                    return 2
-                }
                 return people.count + 2
             }else {
                 if people.isEmpty {
@@ -72,8 +68,8 @@ class MainScreen: UITableViewController {
                 return people.count
             }
         }else {
-            print("else in numberOfRowsInSection")
             apendNonAplicable()
+            print("else in numberOfRowsInSection")
             return people.count
         }
     }
@@ -169,34 +165,16 @@ class MainScreen: UITableViewController {
             return true
         }
 // MARK: - Costome functions:
+    var ifNoAssignment = "No Assignment"
+    var ifNoPerson = "No Person"
     func apendNonAplicable() {
-        let noPerson = "No Person"
-        let noAssignment = "No assignment"
-        print(people)
-        for i in 0 ... people.count {
-            let number = i - i + 1
-            print(number)
-            if people.contains(noPerson) {
-                print(people[number])
-                people.remove(at: number)
-            }
-        }
-        print(assignments)
-        for i in 0 ... assignments.count {
-            let number = i - i + 1
-            print(number)
-            if assignments.contains(noAssignment) {
-                print(assignments[number])
-                assignments.remove(at: number)
-            }
-        }
         if people.count < assignments.count {
             while people.count < assignments.count {
-                people.append(noPerson)
+                people.append(ifNoPerson)
             }
-        }else if assignments.count < people.count {
-            while assignments.count < people.count {
-                assignments.append(noAssignment)
+        }else if people.count > assignments.count {
+            while people.count > assignments.count {
+                assignments.append(ifNoAssignment)
             }
         }
     }
