@@ -90,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 			);
+			indentWidth = 5;
 			name = Modle;
 			sourceTree = "<group>";
 		};
