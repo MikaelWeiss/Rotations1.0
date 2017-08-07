@@ -28,7 +28,11 @@ class MainScreen: UITableViewController {
                 editButtonOutlet.isEnabled = true
                 editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
             }
-            
+        }
+        if tableView.isEditing == true {
+            editButtonOutlet.title = "Done"
+        }else {
+            editButtonOutlet.title = "Edit"
         }
     }
 // MARK: - Outlets:
@@ -130,28 +134,41 @@ class MainScreen: UITableViewController {
     }
     
 // MARK: - TextFieldDelegate
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        if textField.text != "" {
-    //            if groupArray != emptyArray {
-    //                if groupArray.contains(textField.text! as String) {
-    //                    AlertAction(Title: "Group Exists", Message: "This Group Already Exists", alerTitle: "OK")
-    //                }else {
-    //                    groupArray.append(textField.text!)
-    //                    UserDefaults.standard.setValue(groupArray, forKey: "Groups")
-    //                }
-    //            }else {
-    //                groupArray.append(textField.text!)
-    //                UserDefaults.standard.setValue(groupArray, forKey: "Groups")
-    //            }
-    //        }
-    //        textField.text = ""
-    //        tableView.reloadData()
-    //        return true
-    //    }
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            if textField.text != "" {
+                if textField.tag == 1 {
+                    if people.isEmpty == false {
+                        if people.contains(textField.text! as String) {
+                            AlertAction(Title: "Person Exists", Message: "This person already exists in this rotation", alerTitle: "OK")
+                        }else {
+                            people.append(textField.text!)
+                            UserDefaults.standard.setValue(people, forKey: "People")
+                        }
+                    }else {
+                        people.append(textField.text!)
+                        UserDefaults.standard.setValue(people, forKey: "People")
+                    }
+                }else if textField.tag == 2 {
+                    if assignments.isEmpty == false {
+                        if assignments.contains(textField.text! as String) {
+                            AlertAction(Title: "assignment Exists", Message: "This assignment already exists in this rotation", alerTitle: "OK")
+                        }else {
+                            assignments.append(textField.text!)
+                            UserDefaults.standard.setValue(assignments, forKey: "Assignments")
+                        }
+                    }else {
+                        assignments.append(textField.text!)
+                        UserDefaults.standard.setValue(assignments, forKey: "Assignments")
+                    }
+                }
+            }
+            textField.text = ""
+            tableView.reloadData()
+            return true
+        }
 // MARK: - Costome functions:
     func apendNonAplicable() {
-        
         if people.count < assignments.count {
             while people.count < assignments.count {
                 people.append("")
