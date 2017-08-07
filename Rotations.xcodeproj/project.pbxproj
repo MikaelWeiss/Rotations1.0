@@ -80,8 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */,
-				D45FF57E1EDF11FA00BB41F1 /* Settings.swift */,
 				D48095461EECC0A8002B0727 /* MainScreen.swift */,
+				D45FF57E1EDF11FA00BB41F1 /* Settings.swift */,
 			);
 			name = Controler;
 			sourceTree = "<group>";

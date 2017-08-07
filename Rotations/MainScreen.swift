@@ -9,87 +9,176 @@
 import UIKit
 
 class MainScreen: UITableViewController {
-
+// MARK: - Variables
+    var rotation = ""
+    var people: [String] = []
+    var assignments: [String] = []
+// MARK: - View Stuff
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        navigationTitle.title = rotation
+        if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
+            //MARK: set up the edit button
+            if UserDefaults.standard.bool(forKey: "HideEdit") == true {
+                editButtonOutlet.isEnabled = false
+                editButtonOutlet.tintColor = UIColor.clear
+            }else {
+                editButtonOutlet.isEnabled = true
+                editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+            }
+            
+        }
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+// MARK: - Outlets:
+    @IBOutlet weak var navigationTitle: UINavigationItem!
+    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+// MARK: - Actions:
+    @IBAction func EditButton(_ sender: UIBarButtonItem) {
+        tableView.isEditing = !tableView.isEditing
+        if tableView.isEditing == true {
+            sender.title = "Done"
+        }else {
+            sender.title = "Edit"
+        }
+        tableView.reloadData()
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+// MARK: - Table view data source:
+    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if people.count == assignments.count {
+            apendNonAplicable()
+            if tableView.isEditing == true {
+                if people.isEmpty {
+                    tableView.isEditing = true
+                    return 2
+                }
+                return people.count + 2
+            }else {
+                if people.isEmpty {
+                    tableView.isEditing = true
+                    return 2
+                }
+                return people.count
+            }
+        }else {
+            print("else in numberOfRowsInSection")
+            apendNonAplicable()
+            return people.count
+        }
     }
-
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if tableView.isEditing == true && indexPath.row == 0 {
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "addPersonCell", for: indexPath)
+            return Cell
+        }else if tableView.isEditing == true && indexPath.row == 1 {
+            let Cell = tableView.dequeueReusableCell(withIdentifier:  "addAssignmentCell", for: indexPath)
+            return Cell
+        }else {
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "mainScreenCell", for: indexPath)
+            if people.isEmpty == false {
+                if tableView.isEditing == true {
+                    Cell.textLabel?.text = people[indexPath.row - 2]
+                }else {
+                    Cell.textLabel?.text = people[indexPath.row]
+                }
+            }
+            if assignments.isEmpty == false {
+                if tableView.isEditing == true {
+                    Cell.detailTextLabel?.text = assignments[indexPath.row - 2]
+                }else {
+                    Cell.detailTextLabel?.text = assignments[indexPath.row]
+                }
+            }
+            return Cell
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+        // The initial row is reserved for adding new items so it can't be deleted or edited.
+        if indexPath.row == 0 || indexPath.row == 1 {
+            return false
+        }
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
+        // The initial row is reserved for adding new items so it can't be moved.
+        if indexPath.row == 0 || indexPath.row == 1 {
+            return false
+        }
         return true
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != .delete {
+            return
+        }
+        // create the alert
+        let alert = UIAlertController(title: "Deleting", message: "Do you want to delete the person or the assignment from this rotation?", preferredStyle: UIAlertControllerStyle.alert)
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "Person", style: UIAlertActionStyle.default, handler: { (PersonPressed) in
+            self.people.remove(at: indexPath.row)
+        }))
+        alert.addAction(UIAlertAction(title: "Assignment", style: UIAlertActionStyle.default, handler: {
+            (AssignmentsPressed) in
+            self.assignments.remove(at: indexPath.row)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+    }
+    
+// MARK: - TextFieldDelegate
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        textField.resignFirstResponder()
+    //        if textField.text != "" {
+    //            if groupArray != emptyArray {
+    //                if groupArray.contains(textField.text! as String) {
+    //                    AlertAction(Title: "Group Exists", Message: "This Group Already Exists", alerTitle: "OK")
+    //                }else {
+    //                    groupArray.append(textField.text!)
+    //                    UserDefaults.standard.setValue(groupArray, forKey: "Groups")
+    //                }
+    //            }else {
+    //                groupArray.append(textField.text!)
+    //                UserDefaults.standard.setValue(groupArray, forKey: "Groups")
+    //            }
+    //        }
+    //        textField.text = ""
+    //        tableView.reloadData()
+    //        return true
+    //    }
+// MARK: - Costome functions:
+    func apendNonAplicable() {
+        
+        if people.count < assignments.count {
+            while people.count < assignments.count {
+                people.append("")
+            }
+        }else if people.count > assignments.count {
+            while people.count > assignments.count {
+                assignments.append("")
+            }
+        }
+    }
+    func AlertAction(Title: String, Message: String, alerTitle: String) {
+        // create the alert
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: alerTitle, style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+// MARK: - Navigation
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-
+    
 }

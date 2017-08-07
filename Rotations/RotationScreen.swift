@@ -9,12 +9,12 @@
 import UIKit
 
 class RotationScreen: UITableViewController, UITextFieldDelegate {
-// MARK: - Values:
+// MARK: - Variables:
     var groupArray: [String] = []
-    var emptyArray: [String] = []
+    var rotation = ""
+    var isMovingToMainScreen = false
 // MARK: - Outlets:
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
-//    @IBOutlet weak var MyTableView: UITableView!
 // MARK: - System Setup:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,10 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         tableView.isEditing = false
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if isMovingToMainScreen == true {
+            let mainScreen = segue.destination as! MainScreen
+            mainScreen.rotation = rotation
+        }
     }
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
@@ -49,22 +52,22 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             sender.title = "Edit"
         }
         tableView.reloadData()
-//        mabey tableView.addRow? but where do I get the IndexPath
     }
     @IBAction func SettingButton(_ sender: UIBarButtonItem) {
+        isMovingToMainScreen = false
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
     }
-
+    
 // MARK: - TableView Setup:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.isEditing {
-            if groupArray == emptyArray {
+        if tableView.isEditing == true {
+            if groupArray.isEmpty {
                 tableView.isEditing = true
                 return 1
             }
             return groupArray.count + 1
         }else {
-            if groupArray == emptyArray {
+            if groupArray.isEmpty {
                 return 1
             }
             return groupArray.count
@@ -72,23 +75,18 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print(tableView.isEditing)//Prints true
         if tableView.isEditing == true && indexPath.row == 0 {
             let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
-            print(indexPath.row)
-            print("AddGroupCell")
             return Cell
         }else {
             let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
-            if groupArray != emptyArray {
+            if groupArray.isEmpty == false {
                 if tableView.isEditing == true {
                     Cell.textLabel?.text = groupArray[indexPath.row - 1]
                 }else {
                     Cell.textLabel?.text = groupArray[indexPath.row]
                 }
             }
-            print(indexPath.row)
-            print("GroupCell")
             return Cell
         }
     }
@@ -100,7 +98,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         return true
     }
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // The initial row is reserved for adding new items so it can't be moved.     
+        // The initial row is reserved for adding new items so it can't be moved.
         if indexPath.row == 0 {
             return false
         }
@@ -111,6 +109,8 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             return
         }
         groupArray.remove(at: indexPath.row - 1)
+        UserDefaults.standard.set(groupArray, forKey: "Groups")
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let item = groupArray[sourceIndexPath.row - 1]
@@ -118,11 +118,17 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         groupArray.insert(item, at: destinationIndexPath.row - 1)
         UserDefaults.standard.set(groupArray, forKey: "Groups")
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        isMovingToMainScreen = true
+        rotation = groupArray[indexPath.row]
+        performSegue(withIdentifier: "RotationsToMain", sender: UITableViewCell())
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 // MARK: - TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.text != "" {
-            if groupArray != emptyArray {
+            if groupArray.isEmpty == false {
                 if groupArray.contains(textField.text! as String) {
                     AlertAction(Title: "Group Exists", Message: "This Group Already Exists", alerTitle: "OK")
                 }else {
@@ -134,7 +140,6 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
                 UserDefaults.standard.setValue(groupArray, forKey: "Groups")
             }
         }
-        print(groupArray)
         textField.text = ""
         tableView.reloadData()
         return true
