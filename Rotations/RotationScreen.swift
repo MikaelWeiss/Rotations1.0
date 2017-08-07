@@ -65,7 +65,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         isMovingToMainScreen = false
         performSegue(withIdentifier: "RotationsToSettings", sender: UIBarButtonItem())
     }
-    
+     
 // MARK: - TableView Setup:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEditing == true {
