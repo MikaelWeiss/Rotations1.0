@@ -80,7 +80,7 @@ class MainScreen: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if people.isEmpty {
             tableView.isEditing = true
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "AddPersonCell", for: indexPath)
             return Cell
         }else if tableView.isEditing {
             if indexPath.row == 0 {
@@ -90,13 +90,13 @@ class MainScreen: UITableViewController {
                 let Cell = tableView.dequeueReusableCell(withIdentifier: "AddAssignmentCell", for: indexPath)
                 return Cell
             }else{
-                let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "mainScreenCell", for: indexPath)
                 Cell.textLabel?.text = people[indexPath.row - 2]
                 Cell.detailTextLabel?.text = assignments[indexPath.row - 2]
                 return Cell
             }
         }else {
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "mainScreenCell", for: indexPath)
             Cell.textLabel?.text = people[indexPath.row]
             Cell.detailTextLabel?.text = assignments[indexPath.row]
             return Cell
