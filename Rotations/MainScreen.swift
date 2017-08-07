@@ -56,8 +56,8 @@ class MainScreen: UITableViewController {
     }
 // MARK: - Table view data source:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        apendNonAplicable()
         if people.count == assignments.count {
-            apendNonAplicable()
             if tableView.isEditing == true {
                 if people.isEmpty {
                     tableView.isEditing = true
@@ -170,15 +170,33 @@ class MainScreen: UITableViewController {
         }
 // MARK: - Costome functions:
     func apendNonAplicable() {
-        while people.count != assignments.count {
-            if people.count < assignments.count {
-                while people.count < assignments.count {
-                    people.append("this")
-                }
-            }else if people.count > assignments.count {
-                while people.count > assignments.count {
-                    assignments.append("this")
-                }
+        let noPerson = "No Person"
+        let noAssignment = "No assignment"
+        print(people)
+        for i in 0 ... people.count {
+            let number = i - i + 1
+            print(number)
+            if people.contains(noPerson) {
+                print(people[number])
+                people.remove(at: number)
+            }
+        }
+        print(assignments)
+        for i in 0 ... assignments.count {
+            let number = i - i + 1
+            print(number)
+            if assignments.contains(noAssignment) {
+                print(assignments[number])
+                assignments.remove(at: number)
+            }
+        }
+        if people.count < assignments.count {
+            while people.count < assignments.count {
+                people.append(noPerson)
+            }
+        }else if assignments.count < people.count {
+            while assignments.count < people.count {
+                assignments.append(noAssignment)
             }
         }
     }

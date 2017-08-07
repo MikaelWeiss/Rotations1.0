@@ -116,6 +116,12 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
             return
         }
         groupArray.remove(at: indexPath.row - 1)
+        if UserDefaults.standard.object(forKey: "People" + rotation) != nil {
+            UserDefaults.standard.removeObject(forKey: "People" + rotation)
+        }
+        if UserDefaults.standard.object(forKey: "Assignments" + rotation) != nil {
+            UserDefaults.standard.removeObject(forKey: "Assignments" + rotation)
+        }
         UserDefaults.standard.set(groupArray, forKey: "Groups")
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
