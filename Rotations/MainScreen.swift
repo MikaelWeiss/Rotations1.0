@@ -29,6 +29,12 @@ class MainScreen: UITableViewController {
                 editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
             }
         }
+        if UserDefaults.standard.object(forKey: "People" + rotation) != nil {
+            people = UserDefaults.standard.object(forKey: "People" + rotation) as! [String]
+        }
+        if UserDefaults.standard.object(forKey: "Assignments" + rotation) != nil {
+            assignments = UserDefaults.standard.object(forKey: "Assignments" + rotation) as! [String]
+        }
         if tableView.isEditing == true {
             editButtonOutlet.title = "Done"
         }else {
@@ -72,28 +78,27 @@ class MainScreen: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView.isEditing == true && indexPath.row == 0 {
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "addPersonCell", for: indexPath)
+        if people.isEmpty {
+            tableView.isEditing = true
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
             return Cell
-        }else if tableView.isEditing == true && indexPath.row == 1 {
-            let Cell = tableView.dequeueReusableCell(withIdentifier:  "addAssignmentCell", for: indexPath)
-            return Cell
+        }else if tableView.isEditing {
+            if indexPath.row == 0 {
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "AddPersonCell", for: indexPath)
+                return Cell
+            }else if indexPath.row == 1 {
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "AddAssignmentCell", for: indexPath)
+                return Cell
+            }else{
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+                Cell.textLabel?.text = people[indexPath.row - 2]
+                Cell.detailTextLabel?.text = assignments[indexPath.row - 2]
+                return Cell
+            }
         }else {
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "mainScreenCell", for: indexPath)
-            if people.isEmpty == false {
-                if tableView.isEditing == true {
-                    Cell.textLabel?.text = people[indexPath.row - 2]
-                }else {
-                    Cell.textLabel?.text = people[indexPath.row]
-                }
-            }
-            if assignments.isEmpty == false {
-                if tableView.isEditing == true {
-                    Cell.detailTextLabel?.text = assignments[indexPath.row - 2]
-                }else {
-                    Cell.detailTextLabel?.text = assignments[indexPath.row]
-                }
-            }
+            let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+            Cell.textLabel?.text = people[indexPath.row]
+            Cell.detailTextLabel?.text = assignments[indexPath.row]
             return Cell
         }
     }
@@ -143,11 +148,11 @@ class MainScreen: UITableViewController {
                             AlertAction(Title: "Person Exists", Message: "This person already exists in this rotation", alerTitle: "OK")
                         }else {
                             people.append(textField.text!)
-                            UserDefaults.standard.setValue(people, forKey: "People")
+                            UserDefaults.standard.setValue(people, forKey: "People" + rotation)
                         }
                     }else {
                         people.append(textField.text!)
-                        UserDefaults.standard.setValue(people, forKey: "People")
+                        UserDefaults.standard.setValue(people, forKey: "People" + rotation)
                     }
                 }else if textField.tag == 2 {
                     if assignments.isEmpty == false {
@@ -155,11 +160,11 @@ class MainScreen: UITableViewController {
                             AlertAction(Title: "assignment Exists", Message: "This assignment already exists in this rotation", alerTitle: "OK")
                         }else {
                             assignments.append(textField.text!)
-                            UserDefaults.standard.setValue(assignments, forKey: "Assignments")
+                            UserDefaults.standard.setValue(assignments, forKey: "Assignments" + rotation)
                         }
                     }else {
                         assignments.append(textField.text!)
-                        UserDefaults.standard.setValue(assignments, forKey: "Assignments")
+                        UserDefaults.standard.setValue(assignments, forKey: "Assignments" + rotation)
                     }
                 }
             }
@@ -169,13 +174,15 @@ class MainScreen: UITableViewController {
         }
 // MARK: - Costome functions:
     func apendNonAplicable() {
-        if people.count < assignments.count {
-            while people.count < assignments.count {
-                people.append("")
-            }
-        }else if people.count > assignments.count {
-            while people.count > assignments.count {
-                assignments.append("")
+        while people.count != assignments.count {
+            if people.count < assignments.count {
+                while people.count < assignments.count {
+                    people.append("this")
+                }
+            }else if people.count > assignments.count {
+                while people.count > assignments.count {
+                    assignments.append("this")
+                }
             }
         }
     }

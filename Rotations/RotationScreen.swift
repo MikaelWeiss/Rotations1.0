@@ -35,7 +35,11 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         if UserDefaults.standard.object(forKey: "Groups") != nil {
             groupArray = (UserDefaults.standard.object(forKey: "Groups") as? [String])!
         }
-        tableView.isEditing = false
+        if groupArray.isEmpty {
+            tableView.isEditing = true
+        }else {
+            tableView.isEditing = false
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if isMovingToMainScreen == true {
@@ -74,19 +78,22 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView.isEditing == true && indexPath.row == 0 {
+        if groupArray.isEmpty {
+            tableView.isEditing = true
             let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
             return Cell
+        }else if tableView.isEditing {
+            if indexPath.row == 0 {
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "addGroupCell", for: indexPath)
+                return Cell
+            }else {
+                let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
+                Cell.textLabel?.text = groupArray[indexPath.row - 1]
+                return Cell
+            }
         }else {
             let Cell = tableView.dequeueReusableCell(withIdentifier: "GroupTitleCell", for: indexPath)
-            if groupArray.isEmpty == false {
-                if tableView.isEditing == true {
-                    Cell.textLabel?.text = groupArray[indexPath.row - 1]
-                }else {
-                    Cell.textLabel?.text = groupArray[indexPath.row]
-                }
-            }
+            Cell.textLabel?.text = groupArray[indexPath.row]
             return Cell
         }
     }
