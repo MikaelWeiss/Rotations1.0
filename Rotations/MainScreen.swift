@@ -78,11 +78,7 @@ class MainScreen: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if people.isEmpty {
-            tableView.isEditing = true
-            let Cell = tableView.dequeueReusableCell(withIdentifier: "AddPersonCell", for: indexPath)
-            return Cell
-        }else if tableView.isEditing {
+        if tableView.isEditing {
             if indexPath.row == 0 {
                 let Cell = tableView.dequeueReusableCell(withIdentifier: "AddPersonCell", for: indexPath)
                 return Cell
