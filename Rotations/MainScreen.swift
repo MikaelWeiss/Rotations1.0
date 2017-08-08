@@ -140,7 +140,6 @@ class MainScreen: UITableViewController {
     
 // MARK: - TextFieldDelegate
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
             if textField.text != "" {
                 if textField.tag == 1 {
                     if people.isEmpty == false {
@@ -174,7 +173,7 @@ class MainScreen: UITableViewController {
             }
             textField.text = ""
             tableView.reloadData()
-            return true
+            return false
         }
 // MARK: - Costome functions:
     func apendNonAplicable() {
