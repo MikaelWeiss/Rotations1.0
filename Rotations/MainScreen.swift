@@ -70,6 +70,8 @@ class MainScreen: UITableViewController {
 // MARK: - Table view data source:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         apendNonAplicable()
+//        people = firstPeople
+//        assignments = firstAssignments this is causing a BIG BUG
         if people.count == assignments.count {
             if tableView.isEditing == true {
                 return people.count + 2
@@ -127,6 +129,7 @@ class MainScreen: UITableViewController {
         alert.addAction(UIAlertAction(title: "Person", style: UIAlertActionStyle.default, handler: { (PersonPressed) in
             self.firstPeople.remove(at: indexPath.row - 2)
             self.people = self.firstPeople
+//            self.assignments = self.firstAssignments
             print(self.firstPeople)
             tableView.reloadData()
         }))
@@ -135,6 +138,7 @@ class MainScreen: UITableViewController {
             self.firstAssignments.remove(at: indexPath.row - 2)
             print(self.firstAssignments)
             self.assignments = self.firstAssignments
+            self.people = self.firstPeople
             tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
