@@ -22,6 +22,7 @@ class MainScreen: UITableViewController {
         super.viewDidLoad()
     }
     override func viewWillAppear(_ animated: Bool) {
+        tableView.rowHeight = 62
         navigationTitle.title = rotation
         if (UserDefaults.standard.object(forKey: "HideEdit") != nil) {
             //MARK: set up the edit button
@@ -41,6 +42,9 @@ class MainScreen: UITableViewController {
             assignments = UserDefaults.standard.object(forKey: "Assignments" + rotation) as! [String]
             firstAssignments = assignments
         }
+        if firstPeople.isEmpty && firstAssignments.isEmpty {
+            tableView.isEditing = true
+        }
         if tableView.isEditing == true {
             editButtonOutlet.title = "Done"
         }else {
@@ -53,6 +57,9 @@ class MainScreen: UITableViewController {
 // MARK: - Actions:
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
+        if firstPeople.isEmpty && firstAssignments.isEmpty {
+            tableView.isEditing = true
+        }
         if tableView.isEditing == true {
             sender.title = "Done"
         }else {
@@ -135,7 +142,11 @@ class MainScreen: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
+        let item = firstPeople[sourceIndexPath.row]
+        firstPeople.remove(at: sourceIndexPath.row)
+        firstPeople.insert(item, at: destinationIndexPath.row)
+        UserDefaults.standard.set(firstPeople, forKey: "People" + rotation)
+        tableView.reloadData()
     }
     
 // MARK: - TextFieldDelegate
