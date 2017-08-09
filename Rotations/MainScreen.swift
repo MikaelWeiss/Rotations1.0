@@ -192,16 +192,16 @@ class MainScreen: UITableViewController {
         }
 // MARK: - Costome functions:
     func apendNonAplicable() {
+        people = firstPeople
+        assignments = firstAssignments
         if people.count < assignments.count {
             firstPeople = people
             while people.count < assignments.count {
-                people = firstPeople
                 people.append(ifNoPerson)
             }
         }else if people.count > assignments.count {
             firstAssignments = assignments
             while people.count > assignments.count {
-                assignments = firstAssignments
                 assignments.append(ifNoAssignment)
             }
         }
