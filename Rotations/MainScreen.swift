@@ -34,6 +34,7 @@ class MainScreen: UITableViewController {
                 editButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
             }
         }
+        setTheRotationsButton(isEditingTableView: false)
         if UserDefaults.standard.object(forKey: "People" + rotation) != nil {
             people = UserDefaults.standard.object(forKey: "People" + rotation) as! [String]
             firstPeople = people
@@ -47,14 +48,20 @@ class MainScreen: UITableViewController {
         }
         if tableView.isEditing == true {
             editButtonOutlet.title = "Done"
+            setTheRotationsButton(isEditingTableView: true)
         }else {
             editButtonOutlet.title = "Edit"
+            setTheRotationsButton(isEditingTableView: false)
         }
     }
 // MARK: - Outlets:
+    @IBOutlet weak var RotationButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var navigationTitle: UINavigationItem!
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
 // MARK: - Actions:
+    @IBAction func RotationsButton(_ sender: UIBarButtonItem) {
+        reorderArray()
+    }
     @IBAction func EditButton(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
         if firstPeople.isEmpty && firstAssignments.isEmpty {
@@ -62,16 +69,16 @@ class MainScreen: UITableViewController {
         }
         if tableView.isEditing == true {
             sender.title = "Done"
+            setTheRotationsButton(isEditingTableView: true)
         }else {
             sender.title = "Edit"
+            setTheRotationsButton(isEditingTableView: false)
         }
         tableView.reloadData()
     }
 // MARK: - Table view data source:
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         apendNonAplicable()
-//        people = firstPeople
-//        assignments = firstAssignments this is causing a BIG BUG
         if people.count == assignments.count {
             if tableView.isEditing == true {
                 return people.count + 2
@@ -216,6 +223,47 @@ class MainScreen: UITableViewController {
         // show the alert
         self.present(alert, animated: true, completion: nil)
         
+    }
+    func setTheRotationsButton(isEditingTableView: Bool) {
+        if UserDefaults.standard.object(forKey: "ManualRotateButton") != nil {
+            if UserDefaults.standard.bool(forKey: "ManualRotateButton") == true {
+                if isEditingTableView == true {
+                    RotationButtonOutlet.isEnabled = false
+                    RotationButtonOutlet.tintColor = UIColor.clear
+                }else {
+                    RotationButtonOutlet.isEnabled = true
+                    RotationButtonOutlet.tintColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+                }
+            }else {
+                RotationButtonOutlet.isEnabled = false
+                RotationButtonOutlet.tintColor = UIColor.clear
+            }
+        }
+    }
+    func reorderArray() {
+        for _ in 1 ... firstAssignments.count {
+            if diceRoll1 != diceRoll2 {
+                // Swap elements at index: 2 and 3
+                print(firstAssignments)
+                swap(&firstAssignments[diceRoll1], &firstAssignments[diceRoll2])
+                print(firstAssignments)
+            }
+            var diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
+            var diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
+            while diceRoll1 == diceRoll2 {
+                diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
+                diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
+                if diceRoll1 != diceRoll2 {
+                    // Swap elements at index: 2 and 3
+                    print(firstAssignments)
+                    swap(&firstAssignments[diceRoll1], &firstAssignments[diceRoll2])
+                    print(firstAssignments)
+                }
+            }
+            
+            UserDefaults.standard.set(firstAssignments, forKey: "Assignments" + rotation)
+            tableView.reloadData()
+        }
     }
 // MARK: - Navigation
     
