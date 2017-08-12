@@ -67,6 +67,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dy2-1t-Oxv">
                                                     <rect key="frame" x="263" y="15" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.0026559780819999999" green="0.58648008110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="NotifyWhenRotatesChanged:" destination="HD7-0g-22G" eventType="valueChanged" id="obj-la-wRa"/>
                                                     </connections>
@@ -97,6 +98,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WYE-ud-Cg4">
                                                     <rect key="frame" x="263" y="15" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.0026559780819999999" green="0.58648008110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="ManualRotateButtonChanged:" destination="HD7-0g-22G" eventType="valueChanged" id="XzJ-fG-vKY"/>
                                                     </connections>
@@ -129,6 +131,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WFp-sa-fab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2072" y="871"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ZGA-gg-pTI">
+            <objects>
+                <viewController id="O1H-a1-rh3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iz8-gv-0Fy"/>
+                        <viewControllerLayoutGuide type="bottom" id="GvV-Yk-37i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hHj-jF-PKz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5x-5b-hn3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2798" y="870"/>
         </scene>
         <!--Rotations-->
         <scene sceneID="2Rp-eC-NwH">
