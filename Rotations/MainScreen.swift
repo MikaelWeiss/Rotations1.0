@@ -241,9 +241,12 @@ class MainScreen: UITableViewController {
         }
     }
     func reorderArray() {
+        if firstAssignments.count == 0 || firstAssignments.count == 1 {
+            return
+        }
         for _ in 1 ... firstAssignments.count {
-            var diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count) - 1))
-            var diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count) - 1))
+            var diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count - 1)))
+            var diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count - 1)))
             if diceRoll1 != diceRoll2 {
                 // Swap elements at index: 2 and 3
                 print(firstAssignments)
@@ -251,8 +254,8 @@ class MainScreen: UITableViewController {
                 print(firstAssignments)
             }
             while diceRoll1 == diceRoll2 {
-                diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
-                diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count)) + 1)
+                diceRoll1 = Int(arc4random_uniform(UInt32(firstAssignments.count)))
+                diceRoll2 = Int(arc4random_uniform(UInt32(firstAssignments.count)))
                 if diceRoll1 != diceRoll2 {
                     // Swap elements at index: 2 and 3
                     print(firstAssignments)

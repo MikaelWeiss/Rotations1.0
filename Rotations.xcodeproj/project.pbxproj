@@ -15,7 +15,19 @@
 		D4A539D91EDD99B300B4F1CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A539D71EDD99B300B4F1CE /* Main.storyboard */; };
 		D4A539DB1EDD99B300B4F1CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A539DA1EDD99B300B4F1CE /* Assets.xcassets */; };
 		D4A539DE1EDD99B300B4F1CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A539DC1EDD99B300B4F1CE /* LaunchScreen.storyboard */; };
+		D4CE511F1F41E54D00CB09A8 /* RotationSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE511E1F41E54D00CB09A8 /* RotationSetup.swift */; };
+		D4E187241F3F2B0700227E41 /* RotationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E187231F3F2B0700227E41 /* RotationsUITests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4E187261F3F2B0700227E41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4A539C81EDD99B300B4F1CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4A539CF1EDD99B300B4F1CE;
+			remoteInfo = Rotations;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationScreen.swift; sourceTree = "<group>"; };
@@ -28,10 +40,21 @@
 		D4A539DA1EDD99B300B4F1CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4A539DD1EDD99B300B4F1CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4A539DF1EDD99B300B4F1CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4CE511E1F41E54D00CB09A8 /* RotationSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotationSetup.swift; path = ../RotationSetup.swift; sourceTree = "<group>"; };
+		D4E187211F3F2B0700227E41 /* RotationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RotationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E187231F3F2B0700227E41 /* RotationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationsUITests.swift; sourceTree = "<group>"; };
+		D4E187251F3F2B0700227E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D4A539CD1EDD99B300B4F1CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E1871E1F3F2B0700227E41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A539D21EDD99B300B4F1CE /* Rotations */,
+				D4E187221F3F2B0700227E41 /* RotationsUITests */,
 				D4A539D11EDD99B300B4F1CE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A539D01EDD99B300B4F1CE /* Rotations.app */,
+				D4E187211F3F2B0700227E41 /* RotationsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +107,7 @@
 				D45FF57C1EDF115100BB41F1 /* RotationScreen.swift */,
 				D48095461EECC0A8002B0727 /* MainScreen.swift */,
 				D45FF57E1EDF11FA00BB41F1 /* Settings.swift */,
+				D4CE511E1F41E54D00CB09A8 /* RotationSetup.swift */,
 			);
 			name = Controler;
 			sourceTree = "<group>";
@@ -106,6 +132,15 @@
 			name = Extras;
 			sourceTree = "<group>";
 		};
+		D4E187221F3F2B0700227E41 /* RotationsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D4E187231F3F2B0700227E41 /* RotationsUITests.swift */,
+				D4E187251F3F2B0700227E41 /* Info.plist */,
+			);
+			path = RotationsUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,6 +161,24 @@
 			productReference = D4A539D01EDD99B300B4F1CE /* Rotations.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D4E187201F3F2B0700227E41 /* RotationsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E187281F3F2B0700227E41 /* Build configuration list for PBXNativeTarget "RotationsUITests" */;
+			buildPhases = (
+				D4E1871D1F3F2B0700227E41 /* Sources */,
+				D4E1871E1F3F2B0700227E41 /* Frameworks */,
+				D4E1871F1F3F2B0700227E41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4E187271F3F2B0700227E41 /* PBXTargetDependency */,
+			);
+			name = RotationsUITests;
+			productName = RotationsUITests;
+			productReference = D4E187211F3F2B0700227E41 /* RotationsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -141,6 +194,12 @@
 						DevelopmentTeam = X7WM6K9T24;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+					};
+					D4E187201F3F2B0700227E41 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = X7WM6K9T24;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D4A539CF1EDD99B300B4F1CE;
 					};
 				};
 			};
@@ -158,6 +217,7 @@
 			projectRoot = "";
 			targets = (
 				D4A539CF1EDD99B300B4F1CE /* Rotations */,
+				D4E187201F3F2B0700227E41 /* RotationsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -174,6 +234,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4E1871F1F3F2B0700227E41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -183,12 +250,29 @@
 			files = (
 				D48095471EECC0A8002B0727 /* MainScreen.swift in Sources */,
 				D45FF57F1EDF11FA00BB41F1 /* Settings.swift in Sources */,
+				D4CE511F1F41E54D00CB09A8 /* RotationSetup.swift in Sources */,
 				D4A539D41EDD99B300B4F1CE /* AppDelegate.swift in Sources */,
 				D45FF57D1EDF115100BB41F1 /* RotationScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4E1871D1F3F2B0700227E41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E187241F3F2B0700227E41 /* RotationsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4E187271F3F2B0700227E41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4A539CF1EDD99B300B4F1CE /* Rotations */;
+			targetProxy = D4E187261F3F2B0700227E41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D4A539D71EDD99B300B4F1CE /* Main.storyboard */ = {
@@ -336,6 +420,32 @@
 			};
 			name = Release;
 		};
+		D4E187291F3F2B0700227E41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = X7WM6K9T24;
+				INFOPLIST_FILE = RotationsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MikeStudios.RotationsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Rotations;
+			};
+			name = Debug;
+		};
+		D4E1872A1F3F2B0700227E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = X7WM6K9T24;
+				INFOPLIST_FILE = RotationsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MikeStudios.RotationsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Rotations;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -353,6 +463,15 @@
 			buildConfigurations = (
 				D4A539E31EDD99B300B4F1CE /* Debug */,
 				D4A539E41EDD99B300B4F1CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E187281F3F2B0700227E41 /* Build configuration list for PBXNativeTarget "RotationsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E187291F3F2B0700227E41 /* Debug */,
+				D4E1872A1F3F2B0700227E41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

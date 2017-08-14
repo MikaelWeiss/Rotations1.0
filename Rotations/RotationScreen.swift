@@ -120,6 +120,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         if editingStyle != .delete {
             return
         }
+        rotation = groupArray[indexPath.row - 1]
         groupArray.remove(at: indexPath.row - 1)
         if UserDefaults.standard.object(forKey: "People" + rotation) != nil {
             UserDefaults.standard.removeObject(forKey: "People" + rotation)

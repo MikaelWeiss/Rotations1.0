@@ -37,6 +37,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ifp-qA-mpd">
                                                     <rect key="frame" x="263" y="15" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.37196490170000002" green="0.64186888929999997" blue="0.91189974549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="HideEditChanged:" destination="HD7-0g-22G" eventType="valueChanged" id="rUM-7n-yhf"/>
                                                     </connections>
@@ -122,6 +123,7 @@
                             <outlet property="delegate" destination="HD7-0g-22G" id="uds-7M-Sb8"/>
                         </connections>
                     </tableView>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="HideEdit" destination="ifp-qA-mpd" id="XR5-Oz-roN"/>
                         <outlet property="ManualRotateButton" destination="WYE-ud-Cg4" id="pS9-aL-oUJ"/>
@@ -132,10 +134,10 @@
             </objects>
             <point key="canvasLocation" x="2072" y="871"/>
         </scene>
-        <!--View Controller-->
+        <!--Rotation Setup-->
         <scene sceneID="ZGA-gg-pTI">
             <objects>
-                <viewController id="O1H-a1-rh3" sceneMemberID="viewController">
+                <viewController title="Rotation Setup" id="O1H-a1-rh3" customClass="RotationSetup" customModule="Rotations" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iz8-gv-0Fy"/>
                         <viewControllerLayoutGuide type="bottom" id="GvV-Yk-37i"/>
@@ -143,12 +145,44 @@
                     <view key="view" contentMode="scaleToFill" id="hHj-jF-PKz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u7-5K-ee3">
+                                <rect key="frame" x="0.0" y="304" width="85" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rotate every:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDh-uy-ytY" userLabel="Rotate every:">
+                                <rect key="frame" x="0.0" y="64" width="101" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6LE-hb-PKW">
+                                <rect key="frame" x="0.0" y="96" width="320" height="200"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="gHZ-pe-RZU">
+                                <rect key="frame" x="0.0" y="336" width="320" height="200"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="524411895.58467603">
+                                    <!--2017-08-14 13:58:15 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="StartTime" destination="gHZ-pe-RZU" id="CW4-np-psC"/>
+                        <outlet property="rotateEvery" destination="6LE-hb-PKW" id="7ch-cP-fXT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5x-5b-hn3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2798" y="870"/>
+            <point key="canvasLocation" x="2797.5" y="870"/>
         </scene>
         <!--Rotations-->
         <scene sceneID="2Rp-eC-NwH">
@@ -222,6 +256,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="editButtonOutlet" destination="Wox-CC-U2k" id="8RW-lc-ELq"/>
                         <segue destination="HD7-0g-22G" kind="show" identifier="RotationsToSettings" id="n6q-15-2GD"/>
@@ -248,7 +283,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Add Person" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-UW-ZMS">
+                                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Add Person" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-UW-ZMS" userLabel="Add Person">
                                             <rect key="frame" x="8" y="0.0" width="312" height="61.5"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -334,6 +369,11 @@
                                     <action selector="EditButton:" destination="zLI-vU-aOT" id="zqC-WY-LgR"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem image="icons8-time" id="5x0-Q6-MKe">
+                                <connections>
+                                    <segue destination="O1H-a1-rh3" kind="show" id="Kla-RX-h66"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="icons8-synchronize" id="WNU-9X-C7Y">
                                 <connections>
                                     <action selector="RotationsButton:" destination="zLI-vU-aOT" id="asQ-Bk-eRl"/>
@@ -341,6 +381,7 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="RotationButtonOutlet" destination="WNU-9X-C7Y" id="JO0-Ec-7NZ"/>
                         <outlet property="editButtonOutlet" destination="n5x-4a-l5g" id="9GY-7A-9DZ"/>
@@ -356,6 +397,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a53-BB-LnZ" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ScX-dl-QNG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -377,6 +419,7 @@
     <resources>
         <image name="icons8-settings" width="25" height="25"/>
         <image name="icons8-synchronize" width="26" height="26"/>
+        <image name="icons8-time" width="26" height="26"/>
     </resources>
     <color key="tintColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
 </document>
