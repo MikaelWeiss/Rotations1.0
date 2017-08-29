@@ -21,6 +21,7 @@ class Settings: UITableViewController {
     @IBOutlet weak var ManualRotateButton: UISwitch!
     @IBOutlet weak var NotifyWhenRotates: UISwitch!
     @IBOutlet weak var HideEdit: UISwitch!
+    @IBOutlet weak var ColorSegmentedControlOutlet: UISegmentedControl!
 // MARK: - Actions:
     
     @IBAction func HideEditChanged(_ sender: UISwitch) {
@@ -31,6 +32,19 @@ class Settings: UITableViewController {
     }
     @IBAction func ManualRotateButtonChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "ManualRotateButton")
+    }
+    @IBAction func ColorSegmentedControler(_ sender: UISegmentedControl) {
+        if ColorSegmentedControlOutlet.selectedSegmentIndex == 0 {
+            ColorSegmentedControlOutlet.tintColor = UIColor(red:0.00, green:0.49, blue:1.00, alpha:1.0)
+        }else if ColorSegmentedControlOutlet.selectedSegmentIndex == 1 {
+            ColorSegmentedControlOutlet.tintColor = UIColor(red:0.48, green:0.84, blue:0.00, alpha:1.0)
+        }else if ColorSegmentedControlOutlet.selectedSegmentIndex == 2 {
+            ColorSegmentedControlOutlet.tintColor = UIColor(red:1.00, green:0.59, blue:0.00, alpha:1.0)
+        }else if ColorSegmentedControlOutlet.selectedSegmentIndex == 3 {
+            ColorSegmentedControlOutlet.tintColor = UIColor(red:1.00, green:0.22, blue:0.14, alpha:1.0)
+        }else if ColorSegmentedControlOutlet.selectedSegmentIndex == 4 {
+            ColorSegmentedControlOutlet.tintColor = UIColor(red:0.74, green:0.06, blue:0.88, alpha:1.0)
+        }
     }
     
 // MARK: - costome functions:
