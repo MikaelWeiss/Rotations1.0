@@ -250,7 +250,7 @@ class MainScreen: UITableViewController {
             if diceRoll1 != diceRoll2 {
                 // Swap elements at index: 2 and 3
                 print(firstAssignments)
-                swap(&firstAssignments[diceRoll1], &firstAssignments[diceRoll2])
+                firstAssignments.swapAt(diceRoll1, diceRoll2)
                 print(firstAssignments)
             }
             while diceRoll1 == diceRoll2 {
@@ -259,7 +259,7 @@ class MainScreen: UITableViewController {
                 if diceRoll1 != diceRoll2 {
                     // Swap elements at index: 2 and 3
                     print(firstAssignments)
-                    swap(&firstAssignments[diceRoll1], &firstAssignments[diceRoll2])
+                    firstAssignments.swapAt(diceRoll1, diceRoll2)
                     print(firstAssignments)
                 }
             }
