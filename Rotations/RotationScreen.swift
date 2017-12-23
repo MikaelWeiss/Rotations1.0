@@ -136,6 +136,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         groupArray.remove(at: sourceIndexPath.row - 1)
         groupArray.insert(item, at: destinationIndexPath.row - 1)
         UserDefaults.standard.set(groupArray, forKey: "Groups")
+//        swap(&<#T##a: T##T#>, &<#T##b: T##T#>)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         isMovingToMainScreen = true
