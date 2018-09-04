@@ -111,11 +111,12 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
     }
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // The initial row is reserved for adding new items so it can't be moved.
-        if indexPath.row == 0 {
+        if indexPath.row <= 1 {
             return false
         }
         return true
     }
+    // deleting a cell and the accociated assignment or group
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle != .delete {
             return
@@ -163,7 +164,7 @@ class RotationScreen: UITableViewController, UITextFieldDelegate {
         tableView.reloadData()
         return false
     }
-// MARK: - Costome functions:
+// MARK: - Costom functions:
     func AlertAction(Title: String, Message: String, alerTitle: String) {
         // create the alert
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertControllerStyle.alert)
